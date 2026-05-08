@@ -1,0 +1,7 @@
+[
+  ["original", "timestamp"],
+  ["https://www.example.com/", "20230101000000"],
+  ["https://blog.example.com/post/1", "20230615102030"],
+  ["http://archive.example.com/old", "20210101000000"],
+  ["https://elsewhere.test/", "20210101000000"]
+]

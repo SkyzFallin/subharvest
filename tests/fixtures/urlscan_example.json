@@ -1,0 +1,8 @@
+{
+  "results": [
+    {"page": {"domain": "www.example.com", "url": "https://www.example.com/"}, "task": {"time": "2024-04-01T00:00:00.000Z"}},
+    {"page": {"domain": "shop.example.com"}, "task": {"time": "2024-05-01T00:00:00.000Z"}},
+    {"page": {"url": "https://docs.example.com/index.html"}, "task": {"time": "2024-06-01T00:00:00.000Z"}},
+    {"page": {"domain": "elsewhere.test"}, "task": {"time": "2024-06-01T00:00:00.000Z"}}
+  ]
+}

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="180" viewBox="0 0 760 180">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="50%" stop-color="#161b22"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="760" height="180" fill="url(#bg)"/>
+
+  <!-- subdomain tree on the right: apex node fans out into leaves -->
+  <g stroke="#58a6ff" stroke-width="1.2" fill="none" opacity="0.85">
+    <!-- branches from apex (590,90) to leaf nodes -->
+    <line x1="590" y1="90" x2="660" y2="40"/>
+    <line x1="590" y1="90" x2="680" y2="65"/>
+    <line x1="590" y1="90" x2="690" y2="90"/>
+    <line x1="590" y1="90" x2="680" y2="115"/>
+    <line x1="590" y1="90" x2="660" y2="140"/>
+    <!-- one second-level branch (subdomain of subdomain) -->
+    <line x1="680" y1="65" x2="720" y2="50"/>
+    <line x1="680" y1="115" x2="720" y2="130"/>
+  </g>
+  <!-- apex node (filled) -->
+  <circle cx="590" cy="90" r="6" fill="#58a6ff"/>
+  <!-- leaf nodes (hollow) -->
+  <g fill="#0d1117" stroke="#58a6ff" stroke-width="1.5">
+    <circle cx="660" cy="40" r="3.5"/>
+    <circle cx="680" cy="65" r="3.5"/>
+    <circle cx="690" cy="90" r="3.5"/>
+    <circle cx="680" cy="115" r="3.5"/>
+    <circle cx="660" cy="140" r="3.5"/>
+    <circle cx="720" cy="50" r="3.5"/>
+    <circle cx="720" cy="130" r="3.5"/>
+  </g>
+
+  <!-- prompt + brackets around the wordmark -->
+  <text x="40" y="80" font-family="Courier New, monospace" font-size="32" fill="#8b949e">$</text>
+  <text x="68" y="80" font-family="Courier New, monospace" font-size="44" font-weight="bold" fill="#58a6ff">subharvest</text>
+
+  <!-- tagline -->
+  <text x="40" y="118" font-family="Courier New, monospace" font-size="16" fill="#c9d1d9">passive subdomain enumeration from public sources</text>
+
+  <!-- source chips -->
+  <g font-family="Courier New, monospace" font-size="11" fill="#8b949e">
+    <rect x="40"  y="132" width="56" height="20" rx="3" fill="none" stroke="#30363d"/>
+    <text x="68"  y="146" text-anchor="middle">crt.sh</text>
+    <rect x="104" y="132" width="44" height="20" rx="3" fill="none" stroke="#30363d"/>
+    <text x="126" y="146" text-anchor="middle">otx</text>
+    <rect x="156" y="132" width="68" height="20" rx="3" fill="none" stroke="#30363d"/>
+    <text x="190" y="146" text-anchor="middle">urlscan</text>
+    <rect x="232" y="132" width="72" height="20" rx="3" fill="none" stroke="#30363d"/>
+    <text x="268" y="146" text-anchor="middle">wayback</text>
+    <rect x="312" y="132" width="56" height="20" rx="3" fill="none" stroke="#30363d"/>
+    <text x="340" y="146" text-anchor="middle">dns</text>
+  </g>
+
+  <!-- accent line -->
+  <line x1="0" y1="170" x2="760" y2="170" stroke="#58a6ff" stroke-width="1"/>
+</svg>

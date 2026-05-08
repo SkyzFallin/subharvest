@@ -1,0 +1,22 @@
+# subharvest reference configuration
+# Copy to ~/.subharvest/config.toml and fill in API keys you have.
+# All keys are optional — sources without keys are skipped with a notice.
+
+[sources.censys]
+# api_key = "your-censys-api-id:your-censys-api-secret"
+
+[sources.securitytrails]
+# api_key = "..."
+
+[sources.virustotal]
+# api_key = "..."
+
+[rate_limits]
+# Conservative defaults; per-source overrides go here in a future release.
+default_per_second = 5
+
+[cache]
+# Local cache for re-runs against the same domain.
+enabled = true
+ttl_seconds = 3600
+dir = "~/.subharvest/cache"
