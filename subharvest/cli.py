@@ -188,6 +188,27 @@ def main(
             + (f", filtered (wildcard): {report.filtered}" if report.filtered else "")
         )
 
+        # Show the actual list of subdomains. Skip when we're already going to
+        # print the txt list to stdout (would just duplicate it).
+        will_print_txt_to_stdout = output is None and fmt == "txt"
+        visible = [s for s in report.subdomains if not s.filtered_wildcard]
+        if visible and not will_print_txt_to_stdout:
+            console.print()
+            console.print("[bold]subdomains:[/bold]")
+            for s in sorted(visible, key=lambda r: r.name):
+                if s.resolved and s.ips:
+                    suffix = f" [dim]→ {', '.join(s.ips[:3])}[/dim]"
+                elif s.cnames:
+                    suffix = f" [dim]→ {s.cnames[0]}[/dim]"
+                else:
+                    suffix = ""
+                saas = (
+                    f" [yellow](saas: {s.saas_cname})[/yellow]"
+                    if s.saas_cname
+                    else ""
+                )
+                console.print(f"  [cyan]{s.name}[/cyan]{suffix}{saas}")
+
     writer = WRITERS[fmt]
     if output:
         with open(output, "w", encoding="utf-8") as f:
