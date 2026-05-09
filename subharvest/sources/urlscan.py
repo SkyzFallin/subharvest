@@ -4,7 +4,13 @@ from urllib.parse import urlparse
 
 import httpx
 
-from subharvest.sources.base import DEFAULT_HTTP_HEADERS, Finding, Source, SourceKind
+from subharvest.sources.base import (
+    DEFAULT_HTTP_HEADERS,
+    Finding,
+    Source,
+    SourceKind,
+    http_get_with_retry,
+)
 
 
 class UrlScanSource(Source):
@@ -18,8 +24,7 @@ class UrlScanSource(Source):
     async def fetch(self, domain: str) -> list[Finding]:
         params = {"q": f"domain:{domain}", "size": 1000}
         async with httpx.AsyncClient(timeout=self.timeout_seconds, headers=DEFAULT_HTTP_HEADERS) as client:
-            resp = await client.get(self.URL, params=params)
-            resp.raise_for_status()
+            resp = await http_get_with_retry(client, self.URL, params=params)
             data = resp.json()
 
         seen: dict[str, Finding] = {}

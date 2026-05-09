@@ -2,7 +2,13 @@ from __future__ import annotations
 
 import httpx
 
-from subharvest.sources.base import DEFAULT_HTTP_HEADERS, Finding, Source, SourceKind
+from subharvest.sources.base import (
+    DEFAULT_HTTP_HEADERS,
+    Finding,
+    Source,
+    SourceKind,
+    http_get_with_retry,
+)
 
 
 class CrtShSource(Source):
@@ -16,8 +22,7 @@ class CrtShSource(Source):
     async def fetch(self, domain: str) -> list[Finding]:
         params = {"q": f"%.{domain}", "output": "json"}
         async with httpx.AsyncClient(timeout=self.timeout_seconds, headers=DEFAULT_HTTP_HEADERS) as client:
-            resp = await client.get(self.URL, params=params)
-            resp.raise_for_status()
+            resp = await http_get_with_retry(client, self.URL, params=params)
             try:
                 data = resp.json()
             except Exception:

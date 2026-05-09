@@ -105,7 +105,7 @@ async def _run_source(source: Source, domain: str) -> SourceResult:
     started = time.perf_counter()
     try:
         findings = await asyncio.wait_for(
-            source.fetch(domain), timeout=source.timeout_seconds + 5
+            source.fetch(domain), timeout=source.total_budget_seconds
         )
     except asyncio.TimeoutError:
         return SourceResult(

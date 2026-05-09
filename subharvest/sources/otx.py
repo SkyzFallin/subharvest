@@ -2,7 +2,13 @@ from __future__ import annotations
 
 import httpx
 
-from subharvest.sources.base import DEFAULT_HTTP_HEADERS, Finding, Source, SourceKind
+from subharvest.sources.base import (
+    DEFAULT_HTTP_HEADERS,
+    Finding,
+    Source,
+    SourceKind,
+    http_get_with_retry,
+)
 
 
 class OTXSource(Source):
@@ -15,8 +21,7 @@ class OTXSource(Source):
 
     async def fetch(self, domain: str) -> list[Finding]:
         async with httpx.AsyncClient(timeout=self.timeout_seconds, headers=DEFAULT_HTTP_HEADERS) as client:
-            resp = await client.get(self.URL.format(domain=domain))
-            resp.raise_for_status()
+            resp = await http_get_with_retry(client, self.URL.format(domain=domain))
             data = resp.json()
 
         seen: dict[str, Finding] = {}
