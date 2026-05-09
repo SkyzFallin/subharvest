@@ -138,10 +138,35 @@ Built for authorized recon on engagements you have permission to conduct. Passiv
 
 ## Credits
 
-- crt.sh by Sectigo
-- AlienVault OTX
-- urlscan.io
-- Internet Archive Wayback Machine
+### Prior Art
+
+`subharvest` sits in a well-trodden category. These tools shaped what passive subdomain enumeration looks like and are worth knowing about:
+
+- [subfinder](https://github.com/projectdiscovery/subfinder) — ProjectDiscovery, Go.
+- [amass](https://github.com/owasp-amass/amass) — OWASP, Go. Deep active enumeration.
+- [assetfinder](https://github.com/tomnomnom/assetfinder) — tomnomnom, Go. Minimalist.
+- [findomain](https://github.com/findomain/findomain) — Findomain, Rust.
+- [sublist3r](https://github.com/aboul3la/Sublist3r) — Python, no longer actively maintained but established many conventions.
+
+`subharvest` is independent code (no fork, no copy) — but the category exists because of these tools.
+
+### Data Providers
+
+The passive sources query third-party services. Without them this tool has nothing to aggregate:
+
+- [crt.sh](https://crt.sh) by Sectigo — Certificate Transparency search.
+- [AlienVault OTX](https://otx.alienvault.com) — passive DNS.
+- [urlscan.io](https://urlscan.io) — URL scan index.
+- [Internet Archive Wayback Machine](https://web.archive.org) — CDX index.
+
+### Libraries
+
+Built on:
+
+- [`httpx`](https://www.python-httpx.org/) — async HTTP client.
+- [`dnspython`](https://www.dnspython.org/) — async DNS resolver.
+- [`typer`](https://typer.tiangolo.com/) + [`rich`](https://rich.readthedocs.io/) — CLI and terminal output.
+- [`respx`](https://lundberg.github.io/respx/) + [`pytest`](https://docs.pytest.org/) — test suite with mocked HTTP.
 
 ## Project Hygiene
 
