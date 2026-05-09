@@ -12,9 +12,24 @@ The target sees zero traffic from the operator unless `--active` is explicitly s
 
 ## Quick Start
 
-```bash
-pipx install subharvest
+`subharvest` isn't on PyPI yet — install directly from GitHub:
 
+```bash
+# Recommended: isolated install via pipx
+pipx install git+https://github.com/SkyzFallin/subharvest.git
+
+# Or from a local clone
+git clone https://github.com/SkyzFallin/subharvest.git
+cd subharvest
+pipx install .
+
+# Or for development (editable install)
+pipx install -e .
+```
+
+Then:
+
+```bash
 # Default: query all no-key passive sources, JSON to stdout
 subharvest example.com
 
