@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import asyncio
 import os
+import re
 import sys
 import tomllib
+from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
@@ -84,6 +86,14 @@ def main(
     verbose: bool = typer.Option(False, "-v", "--verbose", help="Show per-source query trace"),
     config_path: Optional[Path] = typer.Option(None, "--config", help="Custom config file"),
     no_color: bool = typer.Option(False, "--no-color", help="Disable ANSI color"),
+    output_dir: Path = typer.Option(
+        Path("output"),
+        "--output-dir",
+        help="Directory for the auto-saved txt artifact (relative to cwd)",
+    ),
+    no_auto_output: bool = typer.Option(
+        False, "--no-auto-output", help="Disable auto-save of txt artifact"
+    ),
     version: bool = typer.Option(False, "--version", help="Print version and exit"),
 ):
     """Passive subdomain enumeration. Active probing optional, never default."""
@@ -186,6 +196,21 @@ def main(
             console.print(f"wrote {output}")
     else:
         writer(report, sys.stdout)
+
+    # Auto-save plaintext artifact alongside any other output. Independent of
+    # --format / -o so piping JSON to another tool still leaves a usable file.
+    if not no_auto_output:
+        try:
+            output_dir.mkdir(parents=True, exist_ok=True)
+            stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+            safe_domain = re.sub(r"[^A-Za-z0-9._-]", "_", domain)
+            artifact = output_dir / f"{safe_domain}-{stamp}.txt"
+            with open(artifact, "w", encoding="utf-8") as f:
+                WRITERS["txt"](report, f)
+            if not quiet:
+                console.print(f"[dim]artifact:[/dim] {artifact}")
+        except OSError as exc:
+            console.print(f"[yellow]warning:[/yellow] could not write artifact: {exc}")
 
 
 if __name__ == "__main__":

@@ -101,6 +101,18 @@ Config:
   --version                  Print version and exit
 ```
 
+## Auto-saved Artifacts
+
+Every run automatically writes a plaintext list of subdomains to `./output/<domain>-<timestamp>.txt` in the current working directory, regardless of `--format` or `-o`. This way piping JSON to another tool still leaves you a usable file artifact.
+
+```text
+$ subharvest example.com
+... output ...
+artifact: output/example.com-20260509-091530.txt
+```
+
+Disable with `--no-auto-output`. Change the directory with `--output-dir <path>`.
+
 ## Notes
 
 - **Wildcard handling.** Before resolution, `subharvest` probes the apex with random nonsense subdomains. If they resolve, it captures the wildcard fingerprint (IPs, CNAMEs) and marks matching findings as `filtered_wildcard: true` in JSON output. Filtered entries are not silently dropped — the operator can audit what was filtered.
